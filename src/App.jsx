@@ -35,7 +35,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<RecipeList recipes={recipes} />} />
-          <Route path="/recipe/:id" element={<RecipeDetail recipes={recipes} />} />
+          <Route path="/recipes/:id" element={<RecipeDetail recipes={recipes} />} />
           {/* Pass handleAddRecipe function as a prop */}
           <Route path="/add-recipe" element={<AddRecipe onAddRecipe={handleAddRecipe} />} />
         </Routes>

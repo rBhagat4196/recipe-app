@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '../../utils/api';
 import './AddRecipe.css';
 
 function AddRecipe({ onAddRecipe }) {
@@ -7,24 +8,28 @@ function AddRecipe({ onAddRecipe }) {
   const [image, setImage] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
-  const navigate = useNavigate();  // Use useNavigate hook
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newRecipe = {
-      id: Date.now(),
       title,
       image,
       description,
       category,
     };
-    // Call the onAddRecipe function with the new recipe data
-    onAddRecipe(newRecipe);
-    setTitle('');
-    setImage('');
-    setDescription('');
-    setCategory('');
-    navigate('/');  // Redirect to the home page after adding the recipe
+
+    try {
+      const response = await api.post('/recipes', newRecipe);
+      onAddRecipe(response.data);
+      setTitle('');
+      setImage('');
+      setDescription('');
+      setCategory('');
+      navigate('/')
+    } catch (error) {
+      console.error('Error adding recipe:', error);
+    }
   };
 
   return (
