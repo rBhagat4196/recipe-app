@@ -36,7 +36,7 @@ function RecipeList() {
     <div className="recipe-list-container">
       <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
       <CategoryFilter selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} />
-      <div className="recipe-column-container">
+      <div className="recipe-column-container layout">
         {filteredRecipes.map(recipe => (
           <div key={recipe._id} className="recipe-column">
             <RecipeCard recipe={recipe} />
