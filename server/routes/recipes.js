@@ -64,15 +64,19 @@ router.put('/:id', async (req, res) => {
 
 // Delete a recipe
 router.delete('/:id', async (req, res) => {
+  // console.log(req.params.id);
   try {
-    const recipe = await Recipe.findById(req.params.id);
-    if (!recipe) return res.status(404).json({ message: 'Recipe not found' });
+    const recipe = await Recipe.findOneAndDelete({ _id: req.params.id });
+    if (!recipe) {
+      return res.status(404).json({ message: 'Recipe not found' });
+    }
 
-    await recipe.remove();
     res.json({ message: 'Recipe deleted' });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error(err); // Log the error for debugging purposes
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
 
 module.exports = router;

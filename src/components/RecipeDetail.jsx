@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../../utils/api';
 import './RecipeDetail.css';
+import Loader from './Loader';
 
 function RecipeDetail() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
-  console.log(recipe)
+  // console.log(recipe)
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
@@ -21,7 +22,7 @@ function RecipeDetail() {
   }, [id]);
 
   if (!recipe) {
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
 
   return (
