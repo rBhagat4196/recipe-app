@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './AddRecipe.css';
 
 function AddRecipe({ onAddRecipe }) {
@@ -6,6 +7,7 @@ function AddRecipe({ onAddRecipe }) {
   const [image, setImage] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
+  const navigate = useNavigate();  // Use useNavigate hook
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +24,7 @@ function AddRecipe({ onAddRecipe }) {
     setImage('');
     setDescription('');
     setCategory('');
+    navigate('/');  // Redirect to the home page after adding the recipe
   };
 
   return (
